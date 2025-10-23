@@ -26,7 +26,7 @@ export interface SelectGroupProps {
       value: string;
       disabled?: string; // 禁用字段. 1为禁用，2为不禁用
     };
-    fetchData?: (val: string) => Promise<RemoteSearchRes[]>; // 多选远程搜索请求方法
+    fetchData?: (val?: string) => Promise<RemoteSearchRes[]>; // 多选远程搜索请求方法
     remote?: boolean; // 是否开启远程搜索
     debounceTime?: number; // 防抖时间
   };
