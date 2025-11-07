@@ -13,6 +13,8 @@ import { frontmatter as fm4, toc as t4 } from '/Users/ruhnn/项目测试/happy-u
 import { demoIndex as dmi4 } from '/Users/ruhnn/项目测试/happy-ui/src/select/index.md?type=demo-index';
 import { frontmatter as fm5, toc as t5 } from '/Users/ruhnn/项目测试/happy-ui/src/tycontainer/index.md?type=frontmatter';
 import { demoIndex as dmi5 } from '/Users/ruhnn/项目测试/happy-ui/src/tycontainer/index.md?type=demo-index';
+import { frontmatter as fm6, toc as t6 } from '/Users/ruhnn/项目测试/happy-ui/src/virtualizedList/index.md?type=frontmatter';
+import { demoIndex as dmi6 } from '/Users/ruhnn/项目测试/happy-ui/src/virtualizedList/index.md?type=demo-index';
 
 export const filesMeta = {
   'docs/index': {
@@ -50,6 +52,12 @@ export const filesMeta = {
     toc: t5,
     demoIndex: dmi5,
     textGetter: () => import(/* webpackChunkName: "meta__tycontainer" */'/Users/ruhnn/项目测试/happy-ui/src/tycontainer/index.md?type=text'),
+  },
+  'components/virtualizedList/index': {
+    frontmatter: fm6,
+    toc: t6,
+    demoIndex: dmi6,
+    textGetter: () => import(/* webpackChunkName: "meta__virtualizedList" */'/Users/ruhnn/项目测试/happy-ui/src/virtualizedList/index.md?type=text'),
   },
 }
 
