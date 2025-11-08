@@ -45,7 +45,7 @@ export function createCachedBounds({
       if (index >= itemCount) throw new Error("index out of range");
       if (itemSize) {
         // 索引不在缓存中
-        while (cache.size < index) {
+        while (cache.size <= index) {
           const currentIndex = cache.size;
           const size =
             typeof itemSize === "number"

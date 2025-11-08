@@ -37,15 +37,15 @@ export function getStartEndIndexRange({
     if (bounds) {
       currentOffset = bounds.scrollOffset + bounds.size;
     } else {
-      currentOffset = catchBounds.averageSize;
+      currentOffset += catchBounds.averageSize;
     }
     if (currentOffset >= containerScrollOffset + containerSize) {
       break;
     }
     currentIndex++;
   }
+  
   endIndex = Math.min(currentIndex, maxIndex);
   endIndex = Math.min(maxIndex, endIndex + overScanCount);
-  
   return startIndex < 0 ? [0, -1] : [startIndex, endIndex];
 }

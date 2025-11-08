@@ -1,13 +1,7 @@
 /**
  * @description 用来实现虚拟滚动的核心逻辑
  */
-import {
-  useState,
-  useMemo,
-  useRef,
-  useLayoutEffect,
-  useCallback,
-} from "react";
+import { useState, useMemo, useRef, useLayoutEffect, useCallback } from "react";
 import useResizeObserver from "./useResizeObserver";
 import { useCatchBounds } from "./useCatchBounds";
 import { getEstimatedHeight } from "../utils/getEstimatedHeight";
@@ -25,6 +19,7 @@ export function useVirtualizer({
   itemCount,
   itemSize,
   onResize,
+  onReachBottomLoading,
   overScanCount,
 }: {
   containerEle: HTMLElement | null;
@@ -39,9 +34,20 @@ export function useVirtualizer({
     preSize: { height: number; width: number }
   ) => void | undefined;
   overScanCount: number;
+  onReachBottomLoading: (
+    callback: (val: boolean) => void,
+    reqCount: number
+  ) => void;
 }) {
   // 初始加载的可视区域的item为0时的边界处理
   const [indexRange, setIndexRange] = useState<number[]>([0, -1]);
+  const containerRef = useRef<HTMLElement | null>(null);
+  const lastScrollPosition = useRef<number>(0);
+  const [isReachBottomLoading, setIsReachBottomLoading] =
+    useState<boolean>(false);
+  const reqCountRef = useRef<number>(0);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const indexCatch = useMemo(() => new Set(), []);
   const [startIndex, endIndex] = useMemo(
     (): number[] => [
       Math.min(itemCount - 1, indexRange[0]),
@@ -49,20 +55,10 @@ export function useVirtualizer({
     ],
     [itemCount, indexRange]
   );
-  // 得到的容器的宽度和高度
-  const { height = defaultContainerSize, width = defaultContainerSize } =
-    useResizeObserver({
-      element: containerEle,
-      boxOptions: "content-box",
-      direction,
-      defaultHeight:
-        direction === "vertical" ? defaultContainerSize : undefined,
-      defaultWidth:
-        direction === "horizontal" ? defaultContainerSize : undefined,
-      style: containerStyle,
-    });
+  useLayoutEffect(() => {
+    containerRef.current = containerEle;
+  }, [containerEle]);
 
-  
   // 对容器的宽高进行缓存，以便后续的比较
   const preSizeRef = useRef<{
     height: number;
@@ -71,25 +67,39 @@ export function useVirtualizer({
     height: 0,
     width: 0,
   });
+  // 得到的容器的宽度和高度
+  const { height = defaultContainerSize, width = defaultContainerSize } =
+    useResizeObserver({
+      element: containerRef.current,
+      boxOptions: "content-box",
+      direction,
+      defaultHeight:
+        direction === "vertical" ? defaultContainerSize : undefined,
+      defaultWidth:
+        direction === "horizontal" ? defaultContainerSize : undefined,
+      style: containerStyle,
+    });
   // 判断容器的大小是否发生了变化
   useLayoutEffect(() => {
     if (typeof onResize === "function") {
       const preSize = preSizeRef.current;
       if (preSize.height !== height || preSize.width !== width) {
-        onResize(
-          {
+        if (height !== defaultContainerSize && width !== defaultContainerSize) {
+          onResize(
+            {
+              height,
+              width,
+            },
+            preSize
+          );
+          preSizeRef.current = {
             height,
             width,
-          },
-          preSize
-        );
-        preSizeRef.current = {
-          height,
-          width,
-        };
+          };
+        }
       }
     }
-  }, [height, width, onResize]);
+  }, [height, width, onResize, defaultContainerSize]);
 
   // 创建缓存对象
   const catchBounds = useCatchBounds({
@@ -97,6 +107,24 @@ export function useVirtualizer({
     itemCount,
     itemSize,
   });
+  // 是否进行触底加载的阀值
+  const threshold = useMemo(() => {
+    if (typeof itemSize === "number") {
+      return itemSize;
+    } else if (catchBounds.length > 0) {
+      return catchBounds.averageSize;
+    } else {
+      return estimatedItemSize;
+    }
+  }, [itemSize, estimatedItemSize, catchBounds]);
+
+  // 提供结束加载的方法
+  const finishLoadMore = useCallback((val: boolean = true) => {
+    reqCountRef.current += 1;
+    setIsReachBottomLoading(false);
+    setHasMore(val);
+  }, []);
+
   // 得到列表的估计高度
   const getEstimatedHeightUtil = useCallback(
     () =>
@@ -108,9 +136,52 @@ export function useVirtualizer({
       }),
     [itemCount, catchBounds, estimatedItemSize, itemSize]
   );
+
   // 根据滚动方向得到容器大小
-  const containerSize = direction === "vertical" ? height : width;
-  
+  const containerSize = useMemo(
+    () => (direction === "vertical" ? height : width),
+    [direction, height, width]
+  );
+  // 向下滚动
+  const onReachBottomScroll = useCallback(
+    (scrollOffset: number) => {
+      const totalHeight = getEstimatedHeightUtil();
+      const remainHeight = totalHeight - (scrollOffset + containerSize);
+      if (remainHeight < threshold) {
+        if (hasMore) {
+          setIsReachBottomLoading(true);
+          onReachBottomLoading(finishLoadMore, reqCountRef.current);
+        } else {
+          console.log("已经没有数据可加载了");
+        }
+      }
+    },
+    [
+      hasMore,
+      getEstimatedHeightUtil,
+      containerSize,
+      threshold,
+      reqCountRef,
+      ,
+      onReachBottomLoading,
+      finishLoadMore,
+    ]
+  );
+  // 判断滚动方向
+  const scrollPosition = useCallback(
+    (scrollOffset: number) => {
+      // 判断滚动方法
+      if (scrollOffset > lastScrollPosition.current) {
+        onReachBottomScroll(scrollOffset);
+      } else if (scrollOffset < lastScrollPosition.current) {
+        console.log("向上滚动");
+      } else {
+        console.log("首次加载没有滚动");
+      }
+      lastScrollPosition.current = scrollOffset;
+    },
+    [lastScrollPosition,onReachBottomScroll]
+  );
   // 得到起始索引和结束索引
   const getStartEndIndexRangeUtil = useCallback(
     (containerScrollOffset: number) =>
@@ -121,7 +192,7 @@ export function useVirtualizer({
         overScanCount,
         catchBounds,
       }),
-    [containerSize, itemCount, overScanCount,catchBounds]
+    [containerSize, itemCount, overScanCount, catchBounds]
   );
 
   // 监听容器滚动距离
@@ -131,7 +202,7 @@ export function useVirtualizer({
         ? (containerEle?.scrollTop ?? 0)
         : (containerEle?.scrollLeft ?? 0);
     setIndexRange(getStartEndIndexRangeUtil(containerScrollOffset));
-  }, [containerEle, direction,getStartEndIndexRangeUtil]);
+  }, [containerEle, direction, getStartEndIndexRangeUtil]);
 
   // 向外暴露接口,滚动到指定索引的位置
   const scrollToIndex = useCallback(
@@ -156,18 +227,18 @@ export function useVirtualizer({
         index,
       });
       if (direction === "vertical") {
-        containerEle?.scrollTo({
+        containerRef.current?.scrollTo({
           top: scrollOffset,
           behavior: behavior || undefined,
         });
       } else {
-        containerEle?.scrollTo({
+        containerRef.current?.scrollTo({
           left: scrollOffset,
           behavior: behavior || undefined,
         });
       }
     },
-    [containerEle, direction, catchBounds, itemCount, itemSize, containerSize]
+    [direction, catchBounds, itemCount, itemSize, containerSize]
   );
   const resizeObserverCallback = useCallback(
     (entries: ResizeObserverEntry[]) => {
@@ -185,16 +256,19 @@ export function useVirtualizer({
         }
         const index = parseInt(attribute as string);
         const size = direction === "vertical" ? blockSize : inlineSize;
-        catchBounds.set(index, size);
+        if (!indexCatch.has(index)) {
+          indexCatch.add(index);
+          catchBounds.set(index, size);
+        }
       }
       // 更新起始索引和结束索引
       const containerScrollOffset =
         direction === "vertical"
-          ? (containerEle?.scrollTop ?? 0)
-          : (containerEle?.scrollLeft ?? 0);
+          ? (containerRef.current?.scrollTop ?? 0)
+          : (containerRef.current?.scrollLeft ?? 0);
       setIndexRange(getStartEndIndexRangeUtil(containerScrollOffset));
     },
-    [catchBounds, direction, containerEle, getStartEndIndexRangeUtil]
+    [catchBounds, direction, getStartEndIndexRangeUtil, indexCatch]
   );
 
   // 判断itemSize是否为undefined(动态)
@@ -220,23 +294,25 @@ export function useVirtualizer({
         item.removeAttribute(DATA_ATTRIBUTE);
       });
     };
-  }, [containerEle, resizeObserverObj, startIndex, endIndex]);
+  }, [resizeObserverObj, containerEle, startIndex, endIndex]);
 
   return {
     catchBounds,
     startIndex,
     endIndex,
+    isReachBottomLoading,
     scrollToIndex,
     getEstimatedHeight: getEstimatedHeightUtil,
     onScroll: (scrollOffset: number) => {
       const afterScrollIndexRange = getStartEndIndexRangeUtil(
-        (scrollOffset ?? 0)
+        scrollOffset ?? 0
       );
+      scrollPosition(scrollOffset);
       if (
         afterScrollIndexRange[0] !== indexRange[0] ||
         afterScrollIndexRange[1] !== indexRange[1]
       ) {
-        setIndexRange(afterScrollIndexRange);
+         setIndexRange(afterScrollIndexRange);
       }
     },
   };
