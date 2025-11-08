@@ -180,7 +180,7 @@ export function useVirtualizer({
       }
       lastScrollPosition.current = scrollOffset;
     },
-    [lastScrollPosition,onReachBottomScroll]
+    [onReachBottomScroll]
   );
   // 得到起始索引和结束索引
   const getStartEndIndexRangeUtil = useCallback(
