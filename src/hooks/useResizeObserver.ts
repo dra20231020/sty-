@@ -19,6 +19,7 @@ export function useResizeObserver({
   defaultHeight?: number;
   style?: CSSProperties;
 }) {
+  
   // 被观察的目标元素固定宽高，若设置了则不用开启观测
   const { styleHeight, styleWidth } = useMemo(
     () => ({
@@ -56,16 +57,13 @@ export function useResizeObserver({
       for (const entry of entries) {
         const { contentRect, target } = entry;
         if (element === target) {
-        
           setEleSizeState((preState) => {
             if (
               preState?.height === contentRect.height &&
               preState?.width === contentRect.width
             ) {
-                 
               return preState;
             }
-           
             return {
               height: contentRect.height,
               width: contentRect.width,
@@ -73,15 +71,13 @@ export function useResizeObserver({
           });
         }
       }
-    });
+    },);
     
     
     observer.observe(element, {
       box: boxOptions,
     });
     
-    
-   
     
     return () => observer?.unobserve(element);
   }, [element, disabled, boxOptions, styleHeight, styleWidth]);
