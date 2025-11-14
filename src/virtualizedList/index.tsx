@@ -74,7 +74,7 @@ const Grid = () => {
         overflow: "auto",
         position: "relative",
         border: "1px solid red",
-      pointerEvents: obj.isReachBottomLoading ? "none" : "auto",
+        pointerEvents: obj.isReachBottomLoading ? "none" : "auto",
       }}
     >
       <div style={{ height: obj.getEstimatedHeight() }}>
