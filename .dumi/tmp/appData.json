@@ -18,6 +18,7 @@
     "devDependencies": {
       "@commitlint/cli": "^19.8.1",
       "@commitlint/config-conventional": "^19.8.1",
+      "@types/pdfjs-dist": "^2.10.377",
       "@types/prop-types": "^15.7.15",
       "@types/react": "^19.1.12",
       "@types/react-dom": "^19.1.9",
@@ -58,6 +59,7 @@
     },
     "dependencies": {
       "antd": "^5.27.3",
+      "pdfjs-dist": "3.4.120",
       "prop-types": "^15.8.1"
     }
   },
@@ -67,7 +69,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "preset",
@@ -80,7 +82,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 5
+        "register": 3
       },
       "enableBy": "register",
       "type": "preset",
@@ -107,7 +109,7 @@
       "time": {
         "hooks": {
           "onStart": [
-            1
+            4
           ]
         },
         "register": 2
@@ -154,10 +156,10 @@
       "time": {
         "hooks": {
           "modifyAppData": [
-            7
+            11
           ]
         },
-        "register": 16
+        "register": 14
       },
       "enableBy": "register",
       "type": "plugin",
@@ -170,7 +172,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -190,7 +192,7 @@
             1
           ]
         },
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -220,7 +222,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -237,7 +239,7 @@
             0
           ]
         },
-        "register": 7
+        "register": 6
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1089,7 +1091,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1106,7 +1108,7 @@
             0
           ]
         },
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1119,7 +1121,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1132,7 +1134,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 63
+        "register": 54
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1145,7 +1147,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 71
+        "register": 75
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1162,7 +1164,7 @@
             0
           ]
         },
-        "register": 1
+        "register": 2
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1192,7 +1194,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1222,7 +1224,7 @@
             1
           ]
         },
-        "register": 25
+        "register": 23
       },
       "type": "plugin",
       "path": "/Users/ruhnn/项目测试/happy-ui/node_modules/@umijs/preset-umi/dist/features/mock/mock.js",
@@ -1234,7 +1236,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1286,7 +1288,7 @@
       "time": {
         "hooks": {
           "modifyConfig": [
-            0
+            1
           ]
         },
         "register": 1
@@ -1301,7 +1303,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 2
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1327,7 +1329,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1340,7 +1342,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1353,7 +1355,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1366,7 +1368,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 2
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1392,7 +1394,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "type": "plugin",
       "path": "/Users/ruhnn/项目测试/happy-ui/node_modules/@umijs/preset-umi/dist/features/routeProps/routeProps.js",
@@ -1404,7 +1406,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 3
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1417,7 +1419,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 3
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1430,7 +1432,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 5
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1443,7 +1445,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1456,7 +1458,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1469,7 +1471,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 5
       },
       "type": "plugin",
       "path": "/Users/ruhnn/项目测试/happy-ui/node_modules/@umijs/preset-umi/dist/features/apiRoute/apiRoute.js",
@@ -1481,7 +1483,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 18
+        "register": 13
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1532,7 +1534,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1574,7 +1576,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 4
       },
       "type": "plugin",
       "path": "/Users/ruhnn/项目测试/happy-ui/node_modules/@umijs/preset-umi/dist/features/ui/ui.js",
@@ -1599,7 +1601,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "type": "plugin",
       "path": "/Users/ruhnn/项目测试/happy-ui/node_modules/@umijs/preset-umi/dist/features/hmrGuardian/hmrGuardian.js",
@@ -1611,7 +1613,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 1
       },
       "type": "plugin",
       "path": "/Users/ruhnn/项目测试/happy-ui/node_modules/@umijs/preset-umi/dist/features/routePreloadOnLoad/routePreloadOnLoad.js",
@@ -1623,7 +1625,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "config",
       "type": "plugin",
@@ -1649,7 +1651,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 2
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1662,7 +1664,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 31
+        "register": 27
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1676,13 +1678,13 @@
       "time": {
         "hooks": {
           "modifyAppData": [
-            5
+            7
           ],
           "onStart": [
             0
           ]
         },
-        "register": 25
+        "register": 29
       },
       "type": "plugin",
       "path": "/Users/ruhnn/项目测试/happy-ui/node_modules/@umijs/preset-umi/dist/commands/dev/dev.js",
@@ -1707,7 +1709,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1720,7 +1722,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1746,7 +1748,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1759,7 +1761,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 2
+        "register": 3
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1785,7 +1787,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 2
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1798,7 +1800,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1837,7 +1839,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1850,7 +1852,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1876,7 +1878,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1889,7 +1891,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1902,7 +1904,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1928,7 +1930,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1941,7 +1943,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1954,7 +1956,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -1980,7 +1982,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 3
+        "register": 2
       },
       "enableBy": "register",
       "type": "plugin",
@@ -2084,10 +2086,10 @@
       "time": {
         "hooks": {
           "modifyConfig": [
-            1
+            2
           ]
         },
-        "register": 74
+        "register": 48
       },
       "type": "plugin",
       "path": "/Users/ruhnn/项目测试/happy-ui/node_modules/dumi/dist/features/autoAlias.js",
@@ -2110,7 +2112,7 @@
             1
           ]
         },
-        "register": 2
+        "register": 1
       },
       "enableBy": "register",
       "type": "plugin",
@@ -2125,7 +2127,7 @@
       },
       "time": {
         "hooks": {},
-        "register": 0
+        "register": 1
       },
       "type": "plugin",
       "path": "/Users/ruhnn/项目测试/happy-ui/node_modules/dumi/compiled/@umijs/plugins/index.js",
@@ -2137,7 +2139,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 1
+        "register": 0
       },
       "enableBy": "register",
       "type": "plugin",
@@ -2154,7 +2156,7 @@
             0
           ]
         },
-        "register": 0
+        "register": 2
       },
       "enableBy": "register",
       "type": "plugin",
@@ -2168,12 +2170,12 @@
       "time": {
         "hooks": {
           "modifyConfig": [
-            1,
+            0,
             0,
             0
           ]
         },
-        "register": 18
+        "register": 13
       },
       "enableBy": "register",
       "type": "plugin",
@@ -2193,7 +2195,7 @@
             0
           ],
           "modifyRoutes": [
-            4
+            6
           ]
         },
         "register": 2
@@ -2213,7 +2215,7 @@
             0
           ]
         },
-        "register": 1
+        "register": 2
       },
       "enableBy": "register",
       "type": "plugin",
@@ -2230,7 +2232,7 @@
             0
           ],
           "modifyRoutes": [
-            0
+            1
           ]
         },
         "register": 0
@@ -2252,10 +2254,10 @@
           ],
           "modifyAppData": [
             0,
-            3
+            2
           ]
         },
-        "register": 28
+        "register": 42
       },
       "enableBy": "register",
       "type": "plugin",
@@ -2333,7 +2335,7 @@
       "config": {},
       "time": {
         "hooks": {},
-        "register": 8
+        "register": 15
       },
       "type": "plugin",
       "path": "/Users/ruhnn/项目测试/happy-ui/node_modules/dumi/dist/features/sitemap.js",
@@ -2510,6 +2512,16 @@
         "_atom_route": true
       }
     },
+    "components/pdfView/index": {
+      "id": "components/pdfView/index",
+      "path": "components/pdf-view",
+      "absPath": "/components/pdf-view",
+      "parentId": "DocLayout",
+      "file": "/Users/ruhnn/项目测试/happy-ui/src/pdfView/index.md",
+      "meta": {
+        "_atom_route": true
+      }
+    },
     "components/searchDefault/index": {
       "id": "components/searchDefault/index",
       "path": "components/search-default",
@@ -2599,6 +2611,6 @@
   "faviconFiles": [],
   "port": 8000,
   "host": "0.0.0.0",
-  "ip": "192.168.0.101",
+  "ip": "10.20.61.21",
   "_2LevelNavAvailable": true
 }
